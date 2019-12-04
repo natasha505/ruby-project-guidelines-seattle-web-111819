@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_001401) do
-
-  create_table "pgodexs", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "pokemon_id"
-  end
+ActiveRecord::Schema.define(version: 2019_12_04_215233) do
 
   create_table "pokemons", force: :cascade do |t|
     t.integer "pokemon_id"
     t.text "pokemon_name"
     t.integer "max_cp"
     t.text "types"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "pokemon_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,3 +1,3 @@
 class Pokemon < ActiveRecord::Base
-    has_many :pgodexes
+    has_many :teams
 end 

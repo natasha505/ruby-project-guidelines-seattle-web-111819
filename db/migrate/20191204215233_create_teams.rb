@@ -1,6 +1,6 @@
-class CreatePgodexs < ActiveRecord::Migration[5.2]
+class CreateTeams < ActiveRecord::Migration[5.2]
   def change
-    create_table :pgodexs do |t|
+    create_table :teams do |t|
       t.integer :user_id
       t.integer :pokemon_id
     end 

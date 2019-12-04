@@ -1,8 +1,11 @@
 require 'json'
 require 'rest-client'
-
+User.destroy_all
+User.reset_pk_sequence
 Pokemon.destroy_all
 Pokemon.reset_pk_sequence
+Team.destroy_all
+Team.reset_pk_sequence
 
 
 url_cp = "https://pokemon-go1.p.rapidapi.com/pokemon_max_cp.json"
