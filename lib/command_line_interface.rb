@@ -107,7 +107,11 @@ class CommandLineInterface
 
 #   returns list of pokemon according to the type passed in.    
     def search_by_type #2
-        spaces(45)
+        spaces(35)
+        puts "        🌱    🐞    🔥    ⚡️     🌑    💦     🎸"
+        puts ""
+        puts "        🐲    🥶    🏔    ✈️     ☠️     👻     🥊 "
+        spaces(5)
         puts "____________________________________________________"
         puts   ""
         puts "              Enter POKEMPON TYPE"
@@ -210,7 +214,7 @@ class CommandLineInterface
 
 #adds pokemon to my accout/pgodex
     def add_pokemon_to_my_dex #4
-        spaces(35)
+        spaces(45)
         puts "____________________________________________________"
         puts   ""
         puts "Enter Pokemon NAME that you want to add to your pGoDEX"
@@ -328,11 +332,9 @@ class CommandLineInterface
         main_menu
     end 
 
-
-
 #   deletes pokemon from users Team
     def remove_pokemon_from_my_dex #6
-        spaces(35)
+        spaces(45)
         puts "____________________________________________________"
         puts   ""
         puts "  Enter Pokemon NAME to remove from your pGoDEX"
@@ -341,11 +343,11 @@ class CommandLineInterface
         spaces(3)
         input = gets.chomp.capitalize
         input_id = Pokemon.where(pokemon_name: input)
+
+# if input is assoc w/User via Team, delete it
         if(input_id.length > 0)
+            #binding.pry
             thisthing = input_id[0].pokemon_id
-        
-         # if input is assoc w/User via Team, delete it
-           
             my_team_ids = []  
             my_team = Team.where(user_id: @new_user.id)
             my_team.each { |pok| my_team_ids << pok.pokemon_id}
@@ -353,11 +355,12 @@ class CommandLineInterface
             if_false = my_team_ids.include?(thisthing)   #
             if if_false == false 
 
-            puts "____________________________________________________"
+            puts "_____________________________________________________________________________________________"
             puts   ""
-            puts "      INVALID ENTRY. TRY AGAIN."
-            puts "____________________________________________________"
-            remove_pokemon_from_my_dex 
+            puts "Your pGoDEX is currently empty. Going back to MAIN MENU. Add POKEMON by selecting option [4]."
+            puts "_____________________________________________________________________________________________"
+            spaces(10)
+            main_menu 
             else
                 x = Team.where(user_id: @new_user.id, pokemon_id: input_id[0].pokemon_id).pluck("id") # check = line324
                 #binding.pry
@@ -370,14 +373,13 @@ class CommandLineInterface
             end
             #binding.pry
             #my_team_ids = my_team.map { |pok| Pokemon.find(pok.pokemon_id).pokemon_id}
-           
-        else 
 
+        else 
             spaces(35)
-            puts "_____________________________________________________________________________________________"
+            puts "_________________________"
             puts   ""
-            puts "Your pGoDEX is currently empty. Go back to MAIN MENU & add POKEMON by selecting option [4]."
-            puts "_____________________________________________________________________________________________"
+            puts "      IVALID ENTRY."
+            puts "_________________________"
             spaces(7)
             puts "____________________________________________________"
             puts   ""
@@ -393,16 +395,15 @@ class CommandLineInterface
                 else 
                 puts "____________________________________________________"
                 puts   ""
-                    puts    "Wrong command, going back to MAIN MENU."
+                puts    "Wrong command, going back to MAIN MENU."
                 puts "____________________________________________________"
                 puts   ""
-                    main_menu
+                main_menu
                 end
-        end 
-
+        end
         spaces(3)
         puts "____________________________________________________"
-        puts   ""
+        puts ""
         puts "    To return to MAIN MENU type [1] then ENTER"
         puts "    To EXIT PROGRAM type [2] then ENTER"
         puts "____________________________________________________"
@@ -413,17 +414,15 @@ class CommandLineInterface
         elsif   answer == '2'
             exit
         elsif 
-            binding.pry
+            #binding.pry
             input != check[0].pokemon_name 
             puts "____________________________________________________"
-            puts   ""
+            puts ""
             puts "      Wrong command, going back to MAIN MENU."
             puts "____________________________________________________"
-            puts   ""
+            puts ""
             main_menu
         end
-
-
     end 
   
 #   deletes current users acct    
@@ -436,19 +435,10 @@ class CommandLineInterface
         spaces(3)
         input = gets.chomp
         if input == 'yes'
-            #binding.pry
-        #User.last.destroy
             this_id = User.last.id
             x = Team.where(user_id: this_id).pluck("id")
             Team.destroy(x)
             User.last.destroy 
-
-
-
-        # to_delete = User.find_by(username: input)
-        # binding.pry
-        # x = Team.where(user_id: @new_user.id).pluck("id")
-        # Team.destroy(x)
         spaces(35)
         puts "____________________________________________________"
         puts   ""
@@ -467,7 +457,6 @@ class CommandLineInterface
             delete_acct
         end 
     end
-
 
     def main_menu
         spaces(7)
@@ -545,11 +534,7 @@ class CommandLineInterface
             puts   ""
             end
         end
-
     end
-
-
-
 
 end 
         
